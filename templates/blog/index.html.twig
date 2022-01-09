@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil | {{ parent() }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">Articles récents</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="d-flex flex-row flex-wrap">
+            {% for article in articles %}
+                <div class="card m-2" style="width: 16rem;">
+                    <a href="{{ path('show_article', {'slug': article.slug}) }}">
+                        <img class="card-img-top" src="{{ asset('uploads/' ~ article.picture) }}" alt="{{ article.title }}">
+                    </a>
+                    <div class="card-body">
+                        <a href="{{ path('show_article', {'slug': article.slug}) }}">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                        </a>
+                        <small class="card-text text-secondary">{{ article.content|slice(0, 50) }}...</small>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
